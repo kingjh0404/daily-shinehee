@@ -1,35 +1,4 @@
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
-
-
-
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import CategoryFilter from "./components/CategoryFilter";
 import NewsList from "./components/NewsList";
@@ -38,6 +7,8 @@ import SummaryModal from "./components/SummaryModal";
 export default function App() {
   const [summary, setSummary] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [category, setCategory] = useState("사회"); // 기본값
+  const [trendingKeywords, setTrendingKeywords] = useState([]);
 
   const handleSummarize = async (content) => {
     try {
@@ -48,7 +19,6 @@ export default function App() {
         },
         body: JSON.stringify({ content }),
       });
-
       const data = await res.json();
       setSummary(data.summary);
       setShowModal(true);
@@ -57,11 +27,22 @@ export default function App() {
     }
   };
 
+  const fetchTrendingKeywords = () => {
+    fetch("http://localhost:5001/api/trending")
+      .then((res) => res.json())
+      .then((data) => setTrendingKeywords(data.keywords || []))
+      .catch((err) => console.error("실시간 검색어 로딩 실패", err));
+  };
+
+  useEffect(() => {
+    fetchTrendingKeywords();
+  }, []);
+
   return (
     <div className="app-container">
-      <Header />
-      <CategoryFilter />
-      <NewsList onSummarize={handleSummarize} />
+       <Header trending={trendingKeywords} onRefreshTrending={fetchTrendingKeywords} />
+      <CategoryFilter selectedCategory={category} onSelectCategory={setCategory} />
+<NewsList category={category} onSummarize={handleSummarize} />
       {showModal && (
         <SummaryModal summary={summary} onClose={() => setShowModal(false)} />
       )}

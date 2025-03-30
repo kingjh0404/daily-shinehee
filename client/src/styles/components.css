@@ -39,6 +39,15 @@
     align-items: center;
     margin-top: 0.5rem;
   }
+
+  .thumbnail {
+    width: 100%;
+    height: 180px; /* 원하는 높이로 고정 */
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+  }
+  
   
   .trending-list {
     list-style: none;
@@ -70,14 +79,25 @@
     padding: 1rem;
     border-bottom: 1px solid #ddd;
   }
-  .category-bar button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
+  .category-btn {
     background-color: white;
+    border: 1px solid #ccc;
+    padding: 8px 16px;
+    margin-right: 8px;
+    border-radius: 5px;
     cursor: pointer;
+    transition: all 0.2s ease;
   }
-  .category-bar button:hover {
-    background-color: #e0f0ff;
+  
+  .category-btn:hover {
+    background-color: #c8f5bc;
+  }
+  
+  .category-btn.active {
+    background-color: #48d528;
+    color: white;
+    /* border-color: #2b8ef2; */
+    font-weight: bold;
   }
   
   /* News Item */
