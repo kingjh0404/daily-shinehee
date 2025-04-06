@@ -131,34 +131,143 @@
     cursor: pointer;
   }
   
-  /* Modal */
-  .modal-backdrop {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  /* Modal - 배경 */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5); /* 조금 더 진하게 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* 다른 요소 위에 표시 */
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+/* 배경 페이드 인 애니메이션 */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
   }
-  .modal-box {
-    background-color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 500px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  100% {
+    opacity: 1;
   }
-  .modal-box h2 {
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
+}
+
+/* Modal - 배경 */
+/* 이미지 컨테이너 스타일 */
+.image-container {
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+
+/* Modal - 배경 */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Modal 박스 */
+.modal-box {
+  position: relative;
+  background-color: #fff;
+  padding: 2.5rem 2rem 1.5rem; /* 상단 패딩을 2.5rem로 증가 */
+  border-radius: 10px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease-in-out;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
   }
-  .modal-box button {
-    background-color: #007bff;
-    color: white;
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
-    border: none;
-    cursor: pointer;
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
+}
+
+/* 큰 X 닫기 버튼 */
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-button:hover {
+  color: #444;
+}
+
+.modal-box h2 {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+/* 요약 내용 박스 */
+.summary-container {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.modal-summary {
+  max-height: 300px;
+  overflow-y: auto;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.modal-actions a {
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+.modal-actions a:hover {
+  background-color: #0056b3;
+}
+

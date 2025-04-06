@@ -1,5 +1,4 @@
 import "../styles/components.css";
-import { useState } from "react";
 
 const categories = ["정치", "경제", "사회", "스포츠", "문화", "국제"];
 
