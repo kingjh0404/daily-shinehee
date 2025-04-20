@@ -117,7 +117,7 @@ export default function NewsList({ category, searchQuery, onSummarize }) {
         ))
       ) : (
         <div className="news-fallback">
-          {error ? error : "현재 보여줄 뉴스가 없습니다."}
+          {/* {error ? error : "현재 보여줄 뉴스가 없습니다."} */}
         </div>
       )}
     </div>

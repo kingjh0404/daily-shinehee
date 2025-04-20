@@ -2,7 +2,8 @@
 .header {
     padding: 1rem;
     /* background-color: #f0f0f0; */
-    background-color: #f7ee72;
+    /* background-color: #f7ee72; */
+    background-color: #ffe0fe;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +13,7 @@
     font-weight: bold;
   }
   .search-box input {
-    padding: 0.5rem;
+    padding: 0.65rem;
     border: 1px solid #ccc;
   }
   .search-box button {
@@ -23,14 +24,55 @@
     margin-left: 0.5rem;
   }
 
-  .header-logo {
-    display: block;
-    margin: 0 auto;
-    /* width: 1000px;          */
-    /* height: auto;          */
-    width: 900px;  
-    height: 180px;
+  .header-character {
+    width: 159px;
+    height: auto;
+    object-fit: contain;
+    margin-right: 3rem;
+    margin-left: 1rem;
   }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 요소 간 간격 */
+  }
+
+  .speech-bubble {
+    position: relative;
+    background: #fff;
+    border: 4px solid #333;
+    border-radius: 1.5rem;
+    padding: 3rem 5rem;         /* ✅ 내부 여백 넉넉하게 */
+    font-size: 3.3rem;          /* ✅ 폰트 사이즈 4배! */
+    font-weight: bold;
+    color: #333;
+    max-width: 1100px;          /* ✅ 너비 넉넉하게 */
+    box-shadow: 4px 4px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .speech-bubble::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -48px;               /* 꼬리 위치 크게 조정 */
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border: 48px solid transparent;   /* ✅ 꼬리도 4배 확대 */
+    border-right-color: #333;         /* 말풍선 배경색과 맞춰야 자연스러움 */
+    border-left: 0;
+  }
+  
+  .header-icon{
+    width: 159px;
+    height: auto;
+    object-fit: contain;
+    margin-right: 3rem;
+    margin-left: 1rem;
+  }
+  
+  
+  
   
 
   .search-container {
@@ -114,10 +156,18 @@
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   }
+.news-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+@media (max-width: 480px) {
   .news-card h2 {
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-size: 1rem;
   }
+}
+
   .news-card .date {
     color: gray;
     font-size: 0.9rem;
@@ -129,9 +179,14 @@
     padding: 0.5rem 1rem;
     margin-top: 1rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 6px; /* 둥근 버튼 */
   }
   
-
+  .news-card button:hover {
+    background-color: #218838;
+  }
+  
   /* Modal - 배경 */
 .modal-backdrop {
   position: fixed;
@@ -196,9 +251,11 @@
   border-radius: 10px;
   width: 100%;
   max-width: 600px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   animation: scaleIn 0.3s ease-in-out;
 }
+
+
 
 @keyframes scaleIn {
   0% {
@@ -257,17 +314,16 @@
 }
 
 .modal-actions a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
   background-color: #007bff;
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 4px;
+  color: white;
   text-decoration: none;
-  border: none;
-  cursor: pointer;
-  font-size: 0.9rem;
+  border-radius: 6px;
+  font-weight: 500;
   transition: background-color 0.2s ease;
 }
+
 .modal-actions a:hover {
   background-color: #0056b3;
 }
-
