@@ -1,26 +1,33 @@
+// // src/components/NewsItem.js
+
 // import "../styles/components.css";
+// import TTSButton from "./TTSButton";
 
-
-// export default function NewsItem({ article, onSummarize }) {
-//   const { title, description, publishedAt, urlToImage, content, url } = article;
-
-//   const fullText = `${title || ""}\n\n${description || ""}\n\n${content || ""}`;
+// export default function NewsItem({ article, onSummarize, onToggleBookmark, isBookmarked }) {
+//   const { title, description, content, urlToImage, publishedAt, url } = article;
+//   const fullText = `${title}\n\n${description}\n\n${content}`;
 
 //   return (
 //     <div className="news-card">
-//       {urlToImage && <img src={urlToImage} alt="썸네일" className="thumbnail" />}
+//       {urlToImage && <img src={urlToImage} className="thumbnail" alt="썸네일" />}
 //       <h2>{title}</h2>
 //       <p className="date">{publishedAt?.slice(0, 10)}</p>
 //       <p>{description}</p>
-//       <button
-//         onClick={() => {
-//           console.log("📰 요약 대상 기사 전체:\n", fullText); // 프론트 콘솔 로그
-//           // 여기서 url도 함께 onSummarize로 전달
-//           onSummarize(fullText, url);
-//         }}
-//       >
-//         요약하기
-//       </button>
+
+//       <div className="news-actions">
+//         <button onClick={() => onSummarize(fullText, url, urlToImage)} className="action-btn">
+//           요약하기
+//         </button>
+//       {/* TTS 버튼 */}
+//       <TTSButton text={fullText} />
+
+//         <button
+//           onClick={() => onToggleBookmark(article)}
+//           className={`bookmark-btn ${isBookmarked ? "bookmarked" : ""}`}
+//         >
+//           {isBookmarked ? "⭐" : "☆"}
+//         </button>
+//       </div>
 //     </div>
 //   );
 // }
@@ -28,27 +35,51 @@
 
 
 
-// NewsItem.js
 import "../styles/components.css";
+import TTSButton from "./TTSButton";
 
-export default function NewsItem({ article, onSummarize }) {
-  const { title, description, publishedAt, urlToImage, content, url } = article;
-  const fullText = `${title || ""}\n\n${description || ""}\n\n${content || ""}`;
+export default function NewsItem({
+  article,
+  onSummarize,
+  onToggleBookmark,
+  isBookmarked,
+  onMarkRead,
+  isRead
+}) {
+  const { title, description, content, urlToImage, publishedAt, url } = article;
+  const fullText = `${title}\n\n${description}\n\n${content}`;
 
   return (
-    <div className="news-card">
-      {urlToImage && <img src={urlToImage} alt="썸네일" className="thumbnail" />}
+    <div className={`news-card ${isRead ? "read" : ""}`}>
+      {/* 읽음 뱃지 */}
+      {isRead && <span className="read-badge">읽음</span>}
+
+      {urlToImage && <img src={urlToImage} className="thumbnail" alt="썸네일" />}
       <h2>{title}</h2>
       <p className="date">{publishedAt?.slice(0, 10)}</p>
       <p>{description}</p>
-      <button
-        onClick={() => {
-          // 요약하기 버튼 클릭 시, urlToImage도 함께 전달
-          onSummarize(fullText, url, urlToImage);
-        }}
-      >
-        요약하기
-      </button>
+
+      <div className="news-actions">
+        <button
+          onClick={() => {
+            onMarkRead(article);
+            onSummarize(fullText, url, urlToImage);
+          }}
+          className="action-btn"
+        >
+          요약하기
+        </button>
+
+        {/* TTS 버튼 */}
+        <TTSButton text={fullText} />
+
+        <button
+          onClick={() => onToggleBookmark(article)}
+          className={`bookmark-btn ${isBookmarked ? "bookmarked" : ""}`}
+        >
+          {isBookmarked ? "⭐" : "☆"}
+        </button>
+      </div>
     </div>
   );
 }

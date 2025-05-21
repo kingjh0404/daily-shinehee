@@ -410,3 +410,48 @@
   display: block !important;
 }
 
+
+
+/* components.css */
+
+.news-actions {
+  display: flex;
+  justify-content: center;  /* ← 버튼 전체를 가운데 정렬 */
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.bookmark-btn {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.bookmark-btn.bookmarked {
+  color: #f5b301;
+  border-color: #f5b301;
+}
+
+
+
+/* 읽은 기사 스타일 */
+.news-card.read {
+  /* 회색 처리 + 약간 투명하게 */
+  filter: grayscale(100%);
+  opacity: 0.6;
+  position: relative;
+}
+
+/* 읽음 뱃지 */
+.read-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #666;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
